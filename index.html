@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #box{
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 30px auto;
+        }
+        #slider{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            display: none;
+            background-color: rgba(100,100,100,0.5);
+        }
+        #small{
+            width: 300px;
+            height: 300px;
+        }
+
+        #imgBox{
+            position: absolute;
+            left: 300px;
+            top: 0px;
+            width: 300px;
+            height: 300px;
+            overflow: hidden;
+            display: none;
+        }
+        #big{
+            width: 900px;
+            height: 900px;
+            position: absolute;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <img src="fch.jpg" id="small" alt="">
+        <div id="slider"></div>
+        <div id="imgBox">
+            <img src="fch.jpg" id="big">
+        </div>
+    </div>
+    <script>
+        var box = document.getElementById('box'),
+            slider = document.getElementById('slider'),
+            big = document.getElementById("big"),
+            imgBox = document.getElementById("imgBox");
+            // 这是slider的一半slider.offsetWidth/2
+        box.onmousemove = function(ev){
+            var left = ev.clientX - 50 - box.offsetLeft;
+            var top = ev.clientY - 50 - box.offsetTop;
+            left = left<0?0:left>200?200:left;
+            top = top<0?0:top>200?200:top;
+            slider.style.left = left + 'px';
+            slider.style.top = top + 'px';
+
+            imgBox.style.display = "block";
+            big.style.left = left / 200 * (-600) + "px";
+            big.style.top = top / 200 * (-600)+ "px";
+        }
+
+        box.onmouseover = function(){
+            slider.style.display = 'block';
+        }
+        box.onmouseout = function(){
+            slider.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
